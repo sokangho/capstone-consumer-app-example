@@ -25,4 +25,6 @@ class Firebase {
   logout = () => this.auth.signOut();
 }
 
-export default Firebase;
+const fb = new Firebase();
+
+export default fb;
