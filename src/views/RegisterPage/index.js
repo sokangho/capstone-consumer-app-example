@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-import { fontUrls, colors, fonts } from '../../styleGuide';
+import { colors, fonts } from '../../styleGuide';
 import RegisterForm from '../../components/RegisterForm';
 import fb from '../../components/Firebase';
+import otpService from '../../services/otp.service';
 
 const ContentContainer = styled.div`
  max-width: 500px;
@@ -30,13 +31,21 @@ const AppSubHeading = styled.h2`
   margin: 0px;
 `;
 
-const URL = fontUrls.robotoSlab;
-
 class RegisterPage extends Component {
-  onSubmit = (obj) => {
+  onSubmit = async (obj) => {
     fb.register(obj.email, obj.passwordOne)
-      .then((authUser) => {
+      .then(async (authUser) => {
         console.log(authUser);
+        const newAppUserReq = {
+          email: obj.email,
+          username: obj.username,
+          mobileNumber: obj.mobileNumber,
+        };
+        const res = await otpService.registerAppUser(newAppUserReq);
+
+        if (res.status === 200) {
+          console.log('new user created', res.data);
+        }
       })
       .catch((e) => console.log(e));
   };

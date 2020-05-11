@@ -75,7 +75,7 @@ class RegisterForm extends Component {
     this.state = {
       email: '',
       username: '',
-      mobile: '',
+      mobileNumber: '',
       passwordOne: '',
       passwordTwo: '',
     };
@@ -88,23 +88,24 @@ class RegisterForm extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { email, username, passwordOne } = this.state;
+    const { email, username, passwordOne, mobileNumber } = this.state;
     const { onSubmit } = this.props;
 
     onSubmit({
       email,
       username,
       passwordOne,
+      mobileNumber,
     });
   };
 
   render() {
-    const { email, username, mobile, passwordOne, passwordTwo } = this.state;
+    const { email, username, mobileNumber, passwordOne, passwordTwo } = this.state;
 
     const isInvalid =
       email === '' ||
       username === '' ||
-      mobile === '' ||
+      mobileNumber === '' ||
       passwordOne === '' ||
       passwordOne !== passwordTwo;
 
@@ -133,13 +134,13 @@ class RegisterForm extends Component {
             onChange={this.onChange}
           />
 
-          <InputLabel htmlFor="mobile">Mobile</InputLabel>
+          <InputLabel htmlFor="mobileNumber">Mobile Number</InputLabel>
           <InputBox
             type="text"
-            id="mobile"
-            name="mobile"
+            id="mobileNumber"
+            name="mobileNumber"
             placeholder="Mobile Number"
-            value={mobile}
+            value={mobileNumber}
             onChange={this.onChange}
           />
 
