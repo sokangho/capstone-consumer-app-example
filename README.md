@@ -1,68 +1,50 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Client App Demo
 
-## Available Scripts
+This app is an example of how otp-generator API can be used for time-based one-time password generation and verification.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Components in this App
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- React: This App is built purely in React.
+- Firebase: Used for easy email/password authentication.
+- otp-generator: Our API that is used for generating and verifying time-based one-time password.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Local setup
 
-### `npm test`
+#### Setting up React
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Clone the repo.
+2. Run `npm install` to install project dependencies.
+3. Create a `.env` file in the project root directory.
+4. You should have the following env variables in your `.env` file.
 
-### `npm run build`
+```
+REACT_APP_OTP_API= // otp-generator api url
+REACT_APP_OTP_USERNAME= // otp-generator deverloper account username
+REACT_APP_OTP_PASSWORD= // otp-generator developer account password
+REACT_APP_OTP_ACCOUNT_ID= // otp-generator developer account ID
+REACT_APP_OTP_APP_ID= // otp-generator developer application ID
+REACT_APP_API_KEY= // Firebase related key
+REACT_APP_AUTH_DOMAIN= // Firebase related key
+REACT_APP_DATABASE_URL= // Firebase related key
+REACT_APP_PROJECT_ID= // Firebase related key
+REACT_APP_STORAGE_BUCKET= // Firebase related key
+REACT_APP_MESSAGING_SENDER_ID= // Firebase related key
+REACT_APP_APP_ID= // Firebase related key
+```
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+5. You can either create your own instance of Firebase or ask the development team for Firebase configuration keys.
+6. Run `npm start` to run the App.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+#### Setting up Firebase
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+1. Follow this guide on how to setup your own instance of Firebase. https://firebase.google.com/docs/auth/web/password-auth?authuser=0
+2. Input your Firebase configuration keys in `.env` file in `Setting up React` section.
 
-### `npm run eject`
+#### Setting up otp-generator
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+1. Follow the README guide at https://github.com/OTP-gen-RMIT/SE-project-OTP-gen on how to get otp-generator API service up and running.
+2. Input the url in which otp-generator is hosting at in `REACT_APP_OTP_ACCOUNT` variable in `.env` file in `Setting up React`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+---
