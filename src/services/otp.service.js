@@ -59,8 +59,31 @@ const registerAppUser = async (req) => {
   }
 };
 
+const generateAndSendOtp = async (email) => {
+  const jwt = await getJWT();
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${jwt}`,
+    },
+    data: {
+      applicationId: appId,
+      appUserEmail: email,
+    },
+    url: `${otpUrl}/otp/generate`,
+  };
+
+  try {
+    await axios(options);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 const otpService = {
   registerAppUser,
+  generateAndSendOtp,
 };
 
 export default otpService;

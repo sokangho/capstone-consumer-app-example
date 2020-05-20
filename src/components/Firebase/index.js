@@ -18,11 +18,12 @@ class Firebase {
     this.auth = app.auth();
   }
 
-  register = (email, password) => this.auth.createUserWithEmailAndPassword(email, password);
+  register = async (email, password) =>
+    await this.auth.createUserWithEmailAndPassword(email, password);
 
-  login = (email, password) => this.auth.signInWithEmailAndPassword(email, password);
+  login = async (email, password) => await this.auth.signInWithEmailAndPassword(email, password);
 
-  logout = () => this.auth.signOut();
+  logout = async () => await this.auth.signOut();
 }
 
 const fb = new Firebase();

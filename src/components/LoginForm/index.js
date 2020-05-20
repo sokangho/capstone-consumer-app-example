@@ -68,15 +68,13 @@ const LoginButton = styled.button`
   border-radius: 3px;
 `;
 
-class RegisterForm extends Component {
+class LoginForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       email: '',
-      mobileNumber: '',
-      passwordOne: '',
-      passwordTwo: '',
+      password: '',
     };
   }
 
@@ -87,26 +85,24 @@ class RegisterForm extends Component {
   onSubmit = (e) => {
     e.preventDefault();
 
-    const { email, passwordOne, mobileNumber } = this.state;
+    const { email, password } = this.state;
     const { onSubmit } = this.props;
 
     onSubmit({
       email,
-      passwordOne,
-      mobileNumber,
+      password,
     });
   };
 
   render() {
-    const { email, mobileNumber, passwordOne, passwordTwo } = this.state;
+    const { email, password } = this.state;
 
-    const isInvalid =
-      email === '' || mobileNumber === '' || passwordOne === '' || passwordOne !== passwordTwo;
+    const isInvalid = email === '' || password === '';
 
     return (
       <Panel>
         <ContentContainer onSubmit={this.onSubmit}>
-          <LoginHeading>Register</LoginHeading>
+          <LoginHeading>Login</LoginHeading>
 
           <InputLabel htmlFor="email">Email</InputLabel>
           <InputBox
@@ -118,38 +114,18 @@ class RegisterForm extends Component {
             onChange={this.onChange}
           />
 
-          <InputLabel htmlFor="mobileNumber">Mobile Number</InputLabel>
-          <InputBox
-            type="text"
-            id="mobileNumber"
-            name="mobileNumber"
-            placeholder="Mobile Number"
-            value={mobileNumber}
-            onChange={this.onChange}
-          />
-
-          <InputLabel htmlFor="passwordOne">Password</InputLabel>
+          <InputLabel htmlFor="password">Password</InputLabel>
           <InputBox
             type="password"
-            id="passwordOne"
-            name="passwordOne"
+            id="password"
+            name="password"
             placeholder="Password"
-            value={passwordOne}
-            onChange={this.onChange}
-          />
-
-          <InputLabel htmlFor="passwordTwo">Confirm Password</InputLabel>
-          <InputBox
-            type="password"
-            id="passwordTwo"
-            name="passwordTwo"
-            placeholder="Confirm Password"
-            value={passwordTwo}
+            value={password}
             onChange={this.onChange}
           />
 
           <LoginButton type="submit" disabled={isInvalid}>
-            Register
+            Login
           </LoginButton>
         </ContentContainer>
       </Panel>
@@ -157,4 +133,4 @@ class RegisterForm extends Component {
   }
 }
 
-export default RegisterForm;
+export default LoginForm;
