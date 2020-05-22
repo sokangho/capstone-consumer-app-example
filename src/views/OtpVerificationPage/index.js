@@ -11,13 +11,11 @@ class OtpVerificationPage extends Component {
     super(props);
 
     this.state = {
-      otpLifetime: 100,
+      otpLifetime: 60,
       appUserEmail: '',
-      loading: true,
+      loading: false,
       error: '',
     };
-
-    this.timer = 0;
   }
 
   async componentDidMount() {
@@ -31,15 +29,10 @@ class OtpVerificationPage extends Component {
     }
 
     const app = await otpService.getAppInfo();
-
     this.setState({
       loading: false,
       otpLifetime: app.otpLifetime,
       appUserEmail: data.appUserEmail,
-    });
-
-    this.setState({
-      loading: false,
     });
   }
 

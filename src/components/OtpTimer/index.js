@@ -26,6 +26,7 @@ class OtpTimer extends Component {
 
   startCountDown = () => {
     const { current } = this.state;
+    const { onTimesUp } = this.props;
 
     const now = current - 1;
 
@@ -35,6 +36,7 @@ class OtpTimer extends Component {
 
     if (now === 0) {
       clearInterval(this.timer);
+      onTimesUp();
     }
   };
 
