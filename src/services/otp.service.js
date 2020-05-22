@@ -11,7 +11,6 @@ import axios from 'axios';
 const otpUrl = process.env.REACT_APP_OTP_API;
 const username = process.env.REACT_APP_OTP_USERNAME;
 const password = process.env.REACT_APP_OTP_PASSWORD;
-const accountId = process.env.REACT_APP_OTP_ACCOUNT_ID;
 const appId = process.env.REACT_APP_OTP_APP_ID;
 
 // hacky way of authenticating with otp service
@@ -33,6 +32,25 @@ const getJWT = async () => {
     return res.data.token;
   }
   return null;
+};
+
+const getAppInfo = async () => {
+  const jwt = await getJWT();
+
+  const options = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${jwt}`,
+    },
+    url: `${otpUrl}/applications/${appId}`,
+  };
+
+  try {
+    return await axios(options);
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 const registerAppUser = async (req) => {
@@ -81,9 +99,34 @@ const generateAndSendOtp = async (email) => {
   }
 };
 
+const verifyOtp = async (email, otp) => {
+  const jwt = await getJWT();
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${jwt}`,
+    },
+    data: {
+      applicationId: appId,
+      appUserEmail: email,
+      otp,
+    },
+    url: `${otpUrl}/otp/verify`,
+  };
+
+  try {
+    await axios(options);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 const otpService = {
+  getAppInfo,
   registerAppUser,
   generateAndSendOtp,
+  verifyOtp,
 };
 
 export default otpService;

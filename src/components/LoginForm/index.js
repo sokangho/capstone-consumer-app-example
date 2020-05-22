@@ -1,72 +1,13 @@
 import React, { Component } from 'react';
-import styled from 'styled-components';
 
-import { colors, fonts } from '../../styleGuide';
-
-const Panel = styled.div`
-  width: 300px;
-  height: 100%;
-  margin-top: 20px;
-
-  background: ${colors.primaryWhite};
-  text-align: left;
-
-  box-shadow: 0px 0px 10px ${colors.borderLight};
-  outline: 1px solid ${colors.borderLight};
-`;
-
-const ContentContainer = styled.form`
-  padding: 20px;
-`;
-
-const LoginHeading = styled.h3`
-  font-size: 18px;
-  font-family: ${fonts.robotoSlab};
-  color: ${colors.darkText};
-
-  &::after {
-    content: '';
-    display: block;
-    width: 55px;
-    padding-top: 5px;
-    border-bottom: 2px solid ${colors.primaryBlue};
-  }
-`;
-
-const InputLabel = styled.label`
-  display: block;
-  margin-top: 10px;
-  font-size: 14px;
-  font-family: ${fonts.robotoSlab};
-  font-weight: 400;
-  color: ${colors.darkText};
-`;
-
-const InputBox = styled.input`
-  display: block;
-  border: 1px solid ${colors.borderLight};
-  border-radius: 3px;
-  width: 250px;
-  height: 30px;
-  margin: 5px auto 20px;
-  padding-left: 10px;
-
-  &::placeholder {
-    font-family: ${fonts.robotoSlab};
-    font-size: 14px;
-  }
-`;
-
-const LoginButton = styled.button`
-  display: block;
-  width: 255px;
-  height: 35px;
-  margin: 25px auto 0px;
-  background-color: ${colors.primaryBlue};
-  color: ${colors.primaryWhite};
-  border: none;
-  border-radius: 3px;
-`;
+import {
+  Panel,
+  FormContainer,
+  FormHeading,
+  InputLabel,
+  InputBox,
+  Button,
+} from '../StyledComponents';
 
 class LoginForm extends Component {
   constructor(props) {
@@ -101,8 +42,8 @@ class LoginForm extends Component {
 
     return (
       <Panel>
-        <ContentContainer onSubmit={this.onSubmit}>
-          <LoginHeading>Login</LoginHeading>
+        <FormContainer onSubmit={this.onSubmit}>
+          <FormHeading>Login</FormHeading>
 
           <InputLabel htmlFor="email">Email</InputLabel>
           <InputBox
@@ -124,10 +65,10 @@ class LoginForm extends Component {
             onChange={this.onChange}
           />
 
-          <LoginButton type="submit" disabled={isInvalid}>
+          <Button type="submit" disabled={isInvalid}>
             Login
-          </LoginButton>
-        </ContentContainer>
+          </Button>
+        </FormContainer>
       </Panel>
     );
   }
