@@ -6,15 +6,28 @@ import fb from '../../components/Firebase';
 import otpService from '../../services/otp.service';
 
 class LoginPage extends Component {
+  // async componentDidMount() {
+  //   const { history } = this.props;
+  //   this.authListener = fb.auth.onAuthStateChanged((user) => {
+  //     if (user) {
+  //       history.push('/');
+  //     }
+  //   });
+  // }
+
+  // componentWillUnmount() {
+  //   this.authListener();
+  // }
+
   onSubmit = async (obj) => {
     const { history } = this.props;
 
     fb.login(obj.email, obj.password)
       .then(async (authUser) => {
         // Login successful, generate and send otp to user
-        await otpService.generateAndSendOtp(obj.email);
+        await otpService.generateAndSendOtp(authUser.user.email);
 
-        // Redirect to OTP verification page with user email
+        // Redirect to OTP verification page with user email info
         history.push({
           pathname: '/verify',
           data: {

@@ -36,7 +36,7 @@ class OtpTimer extends Component {
       current: now,
     });
 
-    if (now === 0) {
+    if (now < 0) {
       onTimesUp();
     }
   };

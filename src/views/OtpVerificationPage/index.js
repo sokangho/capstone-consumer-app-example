@@ -5,6 +5,7 @@ import OtpVerificationForm from '../../components/OtpVerificationForm';
 import otpService from '../../services/otp.service';
 import Spinner from 'react-bootstrap/Spinner';
 import OtpTimer from '../../components/OtpTimer';
+import fb from '../../components/Firebase';
 
 class OtpVerificationPage extends Component {
   constructor(props) {
@@ -13,8 +14,9 @@ class OtpVerificationPage extends Component {
     this.state = {
       otpLifetime: 60,
       appUserEmail: '',
-      loading: false,
+      loading: true,
       error: '',
+      isOtpValid: false,
     };
   }
 
@@ -29,16 +31,36 @@ class OtpVerificationPage extends Component {
     }
 
     const app = await otpService.getAppInfo();
-    this.setState({
-      loading: false,
-      otpLifetime: app.otpLifetime,
-      appUserEmail: data.appUserEmail,
-    });
+
+    if (app.status === 200) {
+      this.setState({
+        loading: false,
+        otpLifetime: app.data.otpLifetime,
+        appUserEmail: data.appUserEmail,
+      });
+    } else {
+      this.setState({
+        error: 'Cannot fetch application data.',
+      });
+    }
   }
 
-  // Redirects to login page when timer runs out
-  onTimesUp = () => {
+  async componentWillUnmount() {
+    const { isOtpValid } = this.state;
+
+    if (!isOtpValid) {
+      await this.logOut();
+    }
+  }
+
+  // Logs out of firebase and redirect to login page when timer runs out
+  onTimesUp = async () => {
+    await this.logOut();
+  };
+
+  logOut = async () => {
     const { history } = this.props;
+    await fb.logout();
     history.push('/login');
   };
 
@@ -47,13 +69,15 @@ class OtpVerificationPage extends Component {
     const { history } = this.props;
 
     const isOtpValid = await otpService.verifyOtp(appUserEmail, otp);
+    console.log(isOtpValid);
 
     // If otp is valid, redirects to home page
-    if (isOtpValid) {
-      history.push({
-        pathname: '/',
-        data: { appUserEmail },
+    if (isOtpValid.data) {
+      this.setState({
+        isOtpValid: true,
       });
+
+      history.push('/');
     } else {
       this.setState({
         error: 'Incorrect OTP code',
