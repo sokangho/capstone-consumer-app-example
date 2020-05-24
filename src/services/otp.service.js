@@ -110,7 +110,7 @@ const verifyOtp = async (email, otp) => {
     data: {
       applicationId: Number(appId),
       appUserEmail: email,
-      otp: String(otp),
+      userOTP: otp,
     },
     url: `${otpUrl}/otp/verify`,
   };

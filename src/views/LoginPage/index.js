@@ -6,19 +6,6 @@ import fb from '../../components/Firebase';
 import otpService from '../../services/otp.service';
 
 class LoginPage extends Component {
-  // async componentDidMount() {
-  //   const { history } = this.props;
-  //   this.authListener = fb.auth.onAuthStateChanged((user) => {
-  //     if (user) {
-  //       history.push('/');
-  //     }
-  //   });
-  // }
-
-  // componentWillUnmount() {
-  //   this.authListener();
-  // }
-
   onSubmit = async (obj) => {
     const { history } = this.props;
 

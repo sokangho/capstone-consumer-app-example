@@ -69,7 +69,6 @@ class OtpVerificationPage extends Component {
     const { history } = this.props;
 
     const isOtpValid = await otpService.verifyOtp(appUserEmail, otp);
-    console.log(isOtpValid);
 
     // If otp is valid, redirects to home page
     if (isOtpValid.data) {
