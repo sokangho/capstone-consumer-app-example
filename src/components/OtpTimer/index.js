@@ -9,11 +9,9 @@ class OtpTimer extends Component {
       max: 0,
       current: 0,
     };
-
-    this.timer = 0;
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     const { otpLifetime } = this.props;
 
     this.setState({
@@ -22,6 +20,10 @@ class OtpTimer extends Component {
     });
 
     this.timer = setInterval(this.startCountDown, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timer);
   }
 
   startCountDown = () => {
@@ -34,8 +36,7 @@ class OtpTimer extends Component {
       current: now,
     });
 
-    if (now === 0) {
-      clearInterval(this.timer);
+    if (now < 0) {
       onTimesUp();
     }
   };
