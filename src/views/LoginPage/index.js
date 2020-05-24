@@ -12,7 +12,7 @@ class LoginPage extends Component {
     fb.login(obj.email, obj.password)
       .then(async (authUser) => {
         // Login successful, generate and send otp to user
-        // await otpService.generateAndSendOtp(obj.email);
+        await otpService.generateAndSendOtp(obj.email);
 
         // Redirect to OTP verification page with user email
         history.push({

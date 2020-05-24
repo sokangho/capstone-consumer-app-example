@@ -62,7 +62,7 @@ const registerAppUser = async (req) => {
       Authorization: `Bearer ${jwt}`,
     },
     data: {
-      applicationId: appId,
+      applicationId: Number(appId),
       email: req.email,
       username: req.username,
       mobileNumber: req.mobileNumber,
@@ -86,7 +86,7 @@ const generateAndSendOtp = async (email) => {
       Authorization: `Bearer ${jwt}`,
     },
     data: {
-      applicationId: appId,
+      applicationId: Number(appId),
       appUserEmail: email,
     },
     url: `${otpUrl}/otp/generate`,
@@ -108,15 +108,15 @@ const verifyOtp = async (email, otp) => {
       Authorization: `Bearer ${jwt}`,
     },
     data: {
-      applicationId: appId,
+      applicationId: Number(appId),
       appUserEmail: email,
-      otp,
+      otp: String(otp),
     },
     url: `${otpUrl}/otp/verify`,
   };
 
   try {
-    await axios(options);
+    return await axios(options);
   } catch (e) {
     console.log(e);
   }
