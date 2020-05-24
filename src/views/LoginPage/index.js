@@ -32,6 +32,8 @@ class LoginPage extends Component {
           <AppHeading>Client App</AppHeading>
           <AppSubHeading>Demo</AppSubHeading>
           <LoginForm onSubmit={this.onSubmit} />
+
+          <a href="/register">Register</a>
         </ContentContainer>
       </>
     );
