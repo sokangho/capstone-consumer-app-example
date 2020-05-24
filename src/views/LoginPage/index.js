@@ -1,27 +1,26 @@
 import React, { Component } from 'react';
 
 import { ContentContainer, AppHeading, AppSubHeading } from '../../components/StyledComponents';
-import RegisterForm from '../../components/RegisterForm';
+import LoginForm from '../../components/LoginForm';
 import fb from '../../components/Firebase';
 import otpService from '../../services/otp.service';
 
-class RegisterPage extends Component {
+class LoginPage extends Component {
   onSubmit = async (obj) => {
     const { history } = this.props;
 
-    fb.register(obj.email, obj.passwordOne)
+    fb.login(obj.email, obj.password)
       .then(async (authUser) => {
-        console.log(authUser);
-        const newAppUserReq = {
-          email: obj.email,
-          mobileNumber: obj.mobileNumber,
-        };
-        const res = await otpService.registerAppUser(newAppUserReq);
+        // Login successful, generate and send otp to user
+        // await otpService.generateAndSendOtp(obj.email);
 
-        if (res.status === 200) {
-          // User created successfully, redirect to login page
-          history.push('/login');
-        }
+        // Redirect to OTP verification page with user email
+        history.push({
+          pathname: '/verify',
+          data: {
+            appUserEmail: authUser.user.email,
+          },
+        });
       })
       .catch((e) => console.log(e));
   };
@@ -32,11 +31,11 @@ class RegisterPage extends Component {
         <ContentContainer>
           <AppHeading>Client App</AppHeading>
           <AppSubHeading>Demo</AppSubHeading>
-          <RegisterForm onSubmit={this.onSubmit} />
+          <LoginForm onSubmit={this.onSubmit} />
         </ContentContainer>
       </>
     );
   }
 }
 
-export default RegisterPage;
+export default LoginPage;
