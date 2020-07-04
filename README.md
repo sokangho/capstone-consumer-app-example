@@ -1,8 +1,18 @@
-# Client App Demo
+# RMIT Capstone - OTP Generator Consumer App Example
 
 This app is an example of how otp-generator API can be used for time-based one-time password generation and verification.
 
 ---
+
+Collaborators:
+- Sok Ang Ho
+- Tina Te
+- Adithya Gadiraju
+- Harris Hall
+- Marina Gawrguos
+- Christina Terranova
+- James Ng
+
 
 ## Components in this App
 
